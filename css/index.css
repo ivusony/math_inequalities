@@ -17,12 +17,16 @@
     border: 2px solid black;
 }
 
-.taskInput.invaliddResult{
+.taskInput.invalidResult{
     border: 2px solid red;
+    /* light red */
+    background-color: #ffcccc;
 }
 
 .taskInput.validdResult{
     border: 2px solid green;
+    /* light green */
+    background-color: #ccffcc;
 }
 
 

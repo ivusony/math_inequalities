@@ -12,7 +12,7 @@ function app(){
             Inequalities.calculateXrange( 10, 511, containerElement );
         }
         else{
-            containerElement.innerHTML = "";
+            Inequalities.reset( containerElement );
         }
     });
 }

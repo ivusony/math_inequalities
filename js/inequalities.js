@@ -1,7 +1,8 @@
 import render from "./render.js";
 
 export default {
-    calculateXrange
+    calculateXrange,
+    reset
 }
 
 let operations = [ ">", "<" ];
@@ -54,5 +55,10 @@ function calculateXrange(  minNumber, maxNumber, containerElement ){
     }catch( e ){
         render.error_( e );
     }
+}
+
+
+function reset(containerElement){
+    containerElement.innerHTML = "";
 }
 

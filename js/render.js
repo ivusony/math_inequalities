@@ -1,3 +1,4 @@
+import utils from "./utils.js";
 
 export default {
     calculateXrange,
@@ -43,6 +44,21 @@ function calculateXrange( operation, Xposition, number, idx, containerElement){
         p.textContent = ` ${number} ${operation} X;      X ∈ `;
     }
     
+    // validate user input on button click
+    validateButton.addEventListener( "click", function(){
+        let userInput = input.value;
+        let arrayOfNumbers = userInput.split( "," ).map( number => parseInt( number ) );
+        let result = utils.calculateXrangeCheckAnswer( number, arrayOfNumbers, operation );
+        if( result ){
+            input.classList.remove( "invalidResult" );
+            input.classList.add( "validdResult" );
+        }
+        else{
+            input.classList.remove( "validdResult" );
+            input.classList.add( "invalidResult" );
+        }
+    });
+
     containerElement.appendChild( taskContainer );
 }
 
