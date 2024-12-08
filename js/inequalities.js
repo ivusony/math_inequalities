@@ -1,25 +1,28 @@
+import render from "./render.js";
 
 export default {
     calculateXrange
 }
 
 let operations = [ ">", "<" ];
-function pickRandomOperation(){
+function pickGreatherThanOrLessThanOperator(){
     return operations[ Math.floor( Math.random() * operations.length ) ];
 }
 
-// numberOfTasks: number of tasks to generate
 // minNumber: minimum number to generate - default 10
 // maxNumber: maximum number to generate - default 100
 // containerElement: element to append tasks to
-function calculateXrange( numberOfTasks, minNumber, maxNumber, containerElement ){
+function calculateXrange(  minNumber, maxNumber, containerElement ){
     try{
-        let userInputNumberOfTasksRaw = prompt( "Koliko zadataka želiš da napraviš Kajo?" ) || numberOfTasks;
+        let userInputNumberOfTasksRaw = prompt( "Koliko zadataka želiš da napraviš Kajo?" );
         let userInputNumberOfTasks = parseInt( userInputNumberOfTasksRaw );
         if( isNaN( userInputNumberOfTasks ) ){
-            console.error( "Unesi broj!" );
-            throw new Error( "Unesi broj!" );
+            throw new Error( "Greška! Uneta kombinacija nije broj! Pokušaj ponovo" );
         }
+        if( userInputNumberOfTasks > 500 ){
+            throw new Error( "Greška! Maksimalan broj zadataka je 500" );
+        }
+        let operationBegin = Date.now();
         function factory(){
             let randomNumbers = [];
             function numberGenerator( randomNumbers ){
@@ -27,7 +30,6 @@ function calculateXrange( numberOfTasks, minNumber, maxNumber, containerElement 
                 if( !randomNumbers.includes( a ) ){
                     randomNumbers.push( a );
                 }
-                // console.log( randomNumbers );
                 if( randomNumbers.length === userInputNumberOfTasks ) return;
                 numberGenerator( randomNumbers );
             }
@@ -37,22 +39,18 @@ function calculateXrange( numberOfTasks, minNumber, maxNumber, containerElement 
             //clear container
             containerElement.innerHTML = "";
 
+            // render tasks
             randomNumbers.forEach( ( number, idx ) => {
-                let operation = pickRandomOperation();
-                let p = document.createElement( "p" );
-                let span = document.createElement( "span" );
-                span.classList.add( "number" );
-                span.textContent = `${ idx + 1}.`;
-                p.prepend( span );
-                p.classList.add( "task" );
-                p.textContent = ` X ${operation} ${number}; X ∈ {___________________________}`;
-                containerElement.appendChild( p );
+                let operation = pickGreatherThanOrLessThanOperator();
+                render.calculateXrange( operation, number, idx, containerElement );
             } );
+
+            // log duration
+            console.log( `Duration: ${ Date.now() - operationBegin } miliseconds ` );
         }
         factory();
     }catch( e ){
-        console.error( e );
-        alert( e.message );
+        render.error_( e );
     }
 }
 
