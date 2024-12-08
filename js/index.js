@@ -11,6 +11,9 @@ function app(){
             // containerElement: element to append tasks to
             Inequalities.calculateXrange( 10, 511, containerElement );
         }
+        else{
+            containerElement.innerHTML = "";
+        }
     });
 }
 

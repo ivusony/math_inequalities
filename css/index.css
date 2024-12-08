@@ -10,12 +10,26 @@
 .task {
     font-weight: bold;
     margin: 0;
+    width: 120px;
 }
+
+.taskInput {
+    border: 2px solid black;
+}
+
+.taskInput.invaliddResult{
+    border: 2px solid red;
+}
+
+.taskInput.validdResult{
+    border: 2px solid green;
+}
+
 
 .number {
     margin-right: .5em;
+    width: 20px;
 }
-
 .error {
     color: red;
     font-weight: bold;
