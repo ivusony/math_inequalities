@@ -4,7 +4,7 @@ export default {
     error_
 }
 
-function calculateXrange( operation,  number, idx, containerElement){
+function calculateXrange( operation, Xposition, number, idx, containerElement){
     let taskContainer = document.createElement( "div" );
     taskContainer.classList.add( "taskContainer" );
     let p = document.createElement( "p" );
@@ -14,7 +14,13 @@ function calculateXrange( operation,  number, idx, containerElement){
     span.textContent = `${ idx + 1}.)`;
     taskContainer.prepend( p );
     taskContainer.prepend( span );
-    p.textContent = ` X ${operation} ${number}; X ∈ {___________________________}`;
+    if( Xposition == 0 ){
+        p.textContent = ` X ${operation} ${number}; X ∈ {___________________________}`;
+    }
+    else{
+        p.textContent = ` ${number} ${operation} X; X ∈ {___________________________}`;
+    }
+    
     containerElement.appendChild( taskContainer );
 }
 

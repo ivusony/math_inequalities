@@ -9,6 +9,7 @@ function pickGreatherThanOrLessThanOperator(){
     return operations[ Math.floor( Math.random() * operations.length ) ];
 }
 
+
 // minNumber: minimum number to generate - default 10
 // maxNumber: maximum number to generate - default 100
 // containerElement: element to append tasks to
@@ -42,7 +43,8 @@ function calculateXrange(  minNumber, maxNumber, containerElement ){
             // render tasks
             randomNumbers.forEach( ( number, idx ) => {
                 let operation = pickGreatherThanOrLessThanOperator();
-                render.calculateXrange( operation, number, idx, containerElement );
+                let Xposition = Math.random() < 0.5 ? 0 : 1;
+                render.calculateXrange( operation, Xposition, number, idx, containerElement );
             } );
 
             // log duration
